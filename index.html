@@ -38,16 +38,16 @@
           <i data-lucide="check-circle-2"></i><span>Сегодня</span>
         </button>
         <button class="tab-button" data-tab="training" type="button">
-          <i data-lucide="dumbbell"></i><span>Тренировки</span>
+          <i data-lucide="dumbbell"></i><span>План</span>
         </button>
         <button class="tab-button" data-tab="nutrition" type="button">
-          <i data-lucide="utensils"></i><span>Питание</span>
+          <i data-lucide="utensils"></i><span>Еда</span>
         </button>
         <button class="tab-button" data-tab="supplements" type="button">
-          <i data-lucide="shield-plus"></i><span>Добавки</span>
+          <i data-lucide="shield-plus"></i><span>Здоровье</span>
         </button>
         <button class="tab-button" data-tab="metrics" type="button">
-          <i data-lucide="activity"></i><span>Замеры</span>
+          <i data-lucide="activity"></i><span>Дневник</span>
         </button>
         <button class="tab-button" data-tab="library" type="button">
           <i data-lucide="book-open-check"></i><span>Техника</span>
@@ -128,6 +128,30 @@
                 <label>
                   Сон, ч
                   <input id="quickSleep" type="number" min="0" max="14" step="0.25" placeholder="8" />
+                </label>
+                <label>
+                  Вода, л
+                  <input id="quickWater" type="number" min="0" max="8" step="0.25" placeholder="3.2" />
+                </label>
+                <label>
+                  Энергия 1-5
+                  <input id="quickEnergy" type="number" min="1" max="5" step="1" placeholder="4" />
+                </label>
+                <label>
+                  Боль 0-10
+                  <input id="quickPain" type="number" min="0" max="10" step="1" placeholder="0" />
+                </label>
+                <label>
+                  Баскетбол, мин
+                  <input id="quickBasketball" type="number" min="0" max="240" step="5" placeholder="0" />
+                </label>
+                <label class="wide">
+                  Что получилось
+                  <textarea id="quickWin" rows="2" placeholder="Например: подтянулся чище, добрал еду, лучше прыгал"></textarea>
+                </label>
+                <label class="wide">
+                  Что мешало
+                  <textarea id="quickObstacle" rows="2" placeholder="Например: не выспался, болел локоть, не успел поесть"></textarea>
                 </label>
                 <label class="wide">
                   Заметка
@@ -224,6 +248,16 @@
             </article>
           </div>
 
+          <article class="panel recipe-panel">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Готовка</p>
+                <h2>Рецепты на массу без кухни-цирка</h2>
+              </div>
+            </div>
+            <div class="recipe-list" id="recipeList"></div>
+          </article>
+
           <div class="two-column">
             <article class="panel">
               <div class="section-heading">
@@ -293,14 +327,36 @@
               <h2 id="metricsTitle">Вес, прыжок, силовые</h2>
             </div>
             <div class="toolbar">
+              <button class="action-button" id="connectBackupFile" type="button">
+                <i data-lucide="hard-drive-download"></i><span>Файл на ПК</span>
+              </button>
+              <button class="ghost-button" id="saveBackupNow" type="button">
+                <i data-lucide="save"></i><span>Копия</span>
+              </button>
               <button class="action-button" id="exportData" type="button">
                 <i data-lucide="download"></i><span>Экспорт</span>
+              </button>
+              <button class="ghost-button" id="importData" type="button">
+                <i data-lucide="upload"></i><span>Импорт</span>
               </button>
               <button class="ghost-button" id="resetData" type="button">
                 <i data-lucide="rotate-ccw"></i><span>Сброс</span>
               </button>
+              <input id="importFileInput" type="file" accept="application/json,.json" hidden />
             </div>
           </div>
+
+          <article class="panel status-panel">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Автосохранение</p>
+                <h2>Где лежит статистика</h2>
+              </div>
+            </div>
+            <p class="plain-note" id="backupStatus">Данные сохраняются в этом браузере. На ПК можно подключить отдельный JSON-файл для резервной копии.</p>
+          </article>
+
+          <div class="insight-grid" id="insightCards"></div>
 
           <div class="metrics-grid">
             <article class="panel">
@@ -381,9 +437,18 @@
           <div class="section-heading page-heading">
             <div>
               <p class="eyebrow">Техника</p>
-              <h2 id="libraryTitle">Описание упражнений</h2>
+              <h2 id="libraryTitle">Видео и подсказки</h2>
             </div>
           </div>
+          <article class="panel">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Видео</p>
+                <h2>Открывать перед подходом</h2>
+              </div>
+            </div>
+            <div class="video-list" id="videoLibrary"></div>
+          </article>
           <div class="exercise-grid" id="exerciseLibrary"></div>
           <article class="panel sources-panel">
             <div class="section-heading">

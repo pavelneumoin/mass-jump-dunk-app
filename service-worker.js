@@ -1,4 +1,4 @@
-const CACHE_NAME = "mass-jump-app-v1";
+const CACHE_NAME = "mass-jump-app-v2";
 const APP_ASSETS = [
   "./",
   "./index.html",

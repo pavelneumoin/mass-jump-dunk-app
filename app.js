@@ -362,6 +362,176 @@ const SOURCES = [
   ["NSCA: plyometric exercises", "https://www.nsca.com/education/articles/kinetic-select/plyometric-exercises/", "Плиометрика лучше низкой частотой и качественными малоповторными сетами."],
   ["AAD: hair loss diagnosis and treatment", "https://www.aad.org/public/diseases/hair-loss/treatment/diagnosis-treat", "Добавки для волос только при дефицитах; диагностика у дерматолога."],
   ["Creatine and hair loss RCT", "https://pubmed.ncbi.nlm.nih.gov/40265319/", "12-недельное РКИ не нашло отличий в DHT и параметрах волос между креатином и плацебо."],
+  ["FoodSafety.gov: cooking temperatures", "https://www.foodsafety.gov/food-safety-charts/safe-minimum-internal-temperatures", "Безопасные температуры для птицы, мяса, рыбы и остатков."],
+];
+
+const TECHNIQUE_DETAILS = [
+  {
+    match: ["подтяг"],
+    title: "Подтягивания",
+    setup: "Хват чуть шире плеч, большой палец закрывает перекладину. Сначала опусти плечи от ушей и напряги пресс.",
+    execution: "Тяни грудь к перекладине, локти веди вниз и назад. Вверху подбородок выше перекладины, вниз опускайся подконтрольно.",
+    mistakes: "Рывок ногами, половина амплитуды, расслабленные лопатки внизу, шея вперед.",
+    video: "https://www.nsca.com/education/videos/exercise-technique-the-pull-up/",
+    videoLabel: "NSCA: pull-up",
+  },
+  {
+    match: ["брусь", "отжимания на брусьях"],
+    title: "Брусья",
+    setup: "Плечи вниз, грудь открыта, корпус слегка вперед. Если плечи ноют, амплитуду уменьши и работай с резинкой.",
+    execution: "Опускайся медленно до комфортной глубины, локти не разводи резко в стороны. Вверх дави ладонями в брусья.",
+    mistakes: "Провал плеч к ушам, слишком глубокий низ через боль, резкий отскок, расслабленный корпус.",
+    video: "https://www.youtube.com/watch?v=2z8JmcrW-As",
+    videoLabel: "Calisthenicmovement: dip",
+  },
+  {
+    match: ["горизонтальная тяга", "тяга на низком"],
+    title: "Горизонтальная тяга",
+    setup: "Тело одной линией, пятки на земле или ноги выше для усложнения. Лопатки сначала назад-вниз.",
+    execution: "Тяни грудь к перекладине, пауза 1 сек сверху, опускайся без падения. Чем ниже перекладина и выше ноги, тем тяжелее.",
+    mistakes: "Таз провисает, подбородок тянется вместо груди, нет паузы сверху.",
+    video: "https://www.youtube.com/watch?v=jTaIMXRT6qY",
+    videoLabel: "Catalyst: inverted row",
+  },
+  {
+    match: ["pike", "стойка у стены", "жим блина над головой"],
+    title: "Вертикальный жим плечами",
+    setup: "Ребра вниз, пресс напряжен. Для pike push-up таз высоко, голова идет между рук, кисти устойчиво.",
+    execution: "Опускайся под контролем, локти не разъезжаются слишком широко. Вверх дави пол от себя.",
+    mistakes: "Прогиб в пояснице, обычное отжимание вместо вертикального угла, боль в плечах.",
+    video: "https://www.nasm.org/resource-center/exercise-library/pike-push-up",
+    videoLabel: "NASM: pike push-up",
+  },
+  {
+    match: ["болгар", "выпады", "высокие шаги"],
+    title: "Одноногие упражнения",
+    setup: "Стопа полностью на опоре, колено идет по линии второго-третьего пальца стопы, таз не разворачивается.",
+    execution: "Вниз медленно 2-3 сек, вверх толкайся рабочей ногой. Держи корпус высоким и не подпрыгивай второй ногой.",
+    mistakes: "Колено валится внутрь, слишком узкая постановка, отталкивание задней ногой.",
+    video: "https://www.nasm.org/resource-center/exercise-library/bulgarian-split-squat",
+    videoLabel: "NASM: Bulgarian split squat",
+  },
+  {
+    match: ["румынская", "задняя цепь", "good morning"],
+    title: "Хип-хиндж / румынская тяга",
+    setup: "Стопы под тазом, колени мягкие, спина длинная. Блин или рюкзак держи близко к телу.",
+    execution: "Таз назад, корпус наклоняется из бедра. Остановись, когда чувствуешь растяжение задней поверхности бедра, затем веди таз вперед.",
+    mistakes: "Круглая поясница, присед вместо наклона, рывок весом, потеря напряжения пресса.",
+    video: "https://www.nasm.org/resource-center/exercise-library/dumbbell-romanian-deadlift",
+    videoLabel: "NASM: Romanian deadlift",
+  },
+  {
+    match: ["face pull", "разведения на заднюю"],
+    title: "Задняя дельта и лопатки",
+    setup: "Резинка на уровне лица, корпус высокий, ребра вниз. Начни с легкого натяжения.",
+    execution: "Тяни к лицу, локти высоко, в конце разведи кисти наружу. Движение плавное, без раскачки.",
+    mistakes: "Плечи к ушам, прогиб поясницы, слишком тяжелая резинка.",
+    video: "https://www.nasm.org/resource-center/exercise-library/face-pull",
+    videoLabel: "NASM: face pull",
+  },
+  {
+    match: ["махи", "подъем блина перед"],
+    title: "Махи на дельты",
+    setup: "Легкий вес, корпус высокий, лопатки не зажимай. Локоть чуть согнут.",
+    execution: "Поднимай до уровня плеч, думай не “вверх”, а “в стороны”. Опускай медленно, без броска.",
+    mistakes: "Шраги, рывок корпусом, слишком тяжелый вес, кисть выше локтя.",
+    video: "https://www.acefitness.org/resources/everyone/exercise-library/26/lateral-raise/",
+    videoLabel: "ACE: lateral raise",
+  },
+  {
+    match: ["прыж", "approach", "drop landing"],
+    title: "Прыжок и приземление",
+    setup: "Прыжки делай только свежим. Стопы под тазом, корпус собран, руки работают агрессивно.",
+    execution: "Каждая попытка максимальная, отдых полный. Приземление тихое: стопа-колено-таз амортизируют вместе.",
+    mistakes: "Прыгать до усталости, шумное приземление, колени внутрь, мало отдыха между попытками.",
+    video: "https://jr.nba.com/video/vertical-jump-to-stick/",
+    videoLabel: "NBA Jr.: landing",
+  },
+  {
+    match: ["икр", "носки", "tibialis"],
+    title: "Голень и стопа",
+    setup: "Держись за опору, стопы прямо. Для икр работай в полной амплитуде, для tibialis тяни носки к себе.",
+    execution: "Пауза 1 сек сверху, вниз медленно. Лучше чистые 15 повторов, чем 30 пружинок.",
+    mistakes: "Завал стоп наружу, половина амплитуды, спешка, боль в ахилле.",
+    video: "https://blog.nasm.org/calf-workouts",
+    videoLabel: "NASM: calf raise",
+  },
+];
+
+const VIDEO_LIBRARY = [
+  ["Подтягивание", "NSCA показывает строгую технику pull-up. Смотреть перед тяжелыми днями A и E.", "https://www.nsca.com/education/videos/exercise-technique-the-pull-up/"],
+  ["Подтягивание с резинкой", "NASM: вариант для набора чистых повторов, если полного веса пока много.", "https://www.nasm.org/resource-center/exercise-library/band-assisted-pull-up"],
+  ["Брусья", "Подробная техника параллельных брусьев: плечи вниз, контроль глубины, без провала.", "https://www.youtube.com/watch?v=2z8JmcrW-As"],
+  ["Pike push-up", "NASM: вертикальный жим плечами без штанги, база для сильных дельт.", "https://www.nasm.org/resource-center/exercise-library/pike-push-up"],
+  ["Болгарский сплит-присед", "NASM: одноногая сила для прыжка и устойчивых коленей.", "https://www.nasm.org/resource-center/exercise-library/bulgarian-split-squat"],
+  ["Румынская тяга", "NASM: хип-хиндж и задняя цепь, чтобы прыгать сильнее и беречь поясницу.", "https://www.nasm.org/resource-center/exercise-library/dumbbell-romanian-deadlift"],
+  ["Face pull", "NASM: задняя дельта и здоровье плеч при большом объеме турников.", "https://www.nasm.org/resource-center/exercise-library/face-pull"],
+  ["Вертикальный прыжок с фиксацией", "NBA Jr.: приземление и контроль после прыжка.", "https://jr.nba.com/video/vertical-jump-to-stick/"],
+  ["Box jump", "NASM: механика прыжка и приземления, если на площадке есть безопасная тумба.", "https://www.nasm.org/resource-center/exercise-library/box-jumps"],
+];
+
+const RECIPES = [
+  {
+    title: "Курица + рис на 3 дня",
+    meta: "6 порций · база обеда · примерно 650-850 ккал на порцию",
+    ingredients: "Куриная грудка/бедро 1.2 кг, рис 600 г сухого, оливковое масло 40-60 г, соль, перец, паприка, овощи.",
+    steps: [
+      "Рис промой, залей водой 1:1.8, посоли и вари 15-18 минут. Оставь под крышкой еще 10 минут.",
+      "Курицу нарежь крупно, посоли, добавь паприку и немного масла. Жарь партиями или запеки 22-28 минут при 200 C.",
+      "Разложи по контейнерам: рис, курица, овощи. Масло добавляй в контейнер после готовки, так легче добрать калории.",
+      "Безопасность: птицу доводи до 74 C внутри или готовь до полностью безопасной готовности без розового центра.",
+    ],
+  },
+  {
+    title: "Говядина + паста",
+    meta: "2-3 порции · ужин после тяжелого верха",
+    ingredients: "Фарш/кусочки говядины 500 г, паста 300 г сухой, томаты/соус, сыр 40-60 г, оливковое масло.",
+    steps: [
+      "Пасту вари до al dente, воду не сливай полностью: оставь 100 мл для соуса.",
+      "Говядину обжарь 7-10 минут, добавь томаты, соль, чеснок, туши еще 5-8 минут.",
+      "Смешай с пастой, добавь сыр и масло. Если вес стоит, увеличь пасту на 30-50 г сухого продукта.",
+    ],
+  },
+  {
+    title: "Овсянка для набора",
+    meta: "1 порция · завтрак · 800-1000 ккал при полной версии",
+    ingredients: "Овсянка 100 г, молоко 400 мл, банан, арахисовая паста 25-35 г, мед, протеин по желанию.",
+    steps: [
+      "Овсянку вари на молоке 5-7 минут или залей на ночь в контейнер.",
+      "Добавь банан, пасту, мед. Протеин вмешивай после готовки, когда каша чуть остыла.",
+      "Если утром тяжело есть много, делай жидкую версию: больше молока и пробить блендером.",
+    ],
+  },
+  {
+    title: "Творожный наборный перекус",
+    meta: "1 порция · перед сном или между делами",
+    ingredients: "Творог 250 г, греческий йогурт 150 г, ягоды/банан, мед, орехи 25-35 г.",
+    steps: [
+      "Смешай творог с йогуртом, чтобы было легче есть.",
+      "Добавь фрукт и орехи. Если нужно больше калорий, добавь хлебец/тост или ложку пасты.",
+      "Это не десерт ради десерта, а способ стабильно закрывать белок.",
+    ],
+  },
+  {
+    title: "Лосось/скумбрия + картофель",
+    meta: "2 порции · жиры, омега-3, восстановление",
+    ingredients: "Рыба 400-500 г, картофель 700-900 г, салат, масло, лимон, соль.",
+    steps: [
+      "Картофель нарежь, посоли, запеки 35-45 минут при 200 C.",
+      "Рыбу посоли, добавь лимон, запеки 12-18 минут в зависимости от толщины.",
+      "Ориентир безопасности для рыбы: 63 C внутри или мякоть легко разделяется вилкой.",
+    ],
+  },
+  {
+    title: "Сэндвич до тренировки",
+    meta: "10 минут · когда нет времени на нормальный прием",
+    ingredients: "Хлеб 2-4 ломтика, индейка/курица/тунец, сыр, йогуртовый соус, банан или сок.",
+    steps: [
+      "Собери сэндвич без большого количества жирного соуса, чтобы не было тяжести на баскетболе.",
+      "Ешь за 60-120 минут до тренировки. Если времени меньше, оставь банан/сок и йогурт.",
+      "После тренировки обязательно добери большой прием еды, иначе набор будет буксовать.",
+    ],
+  },
 ];
 
 let state = loadState();
@@ -369,6 +539,12 @@ let selectedWorkout = "A";
 let timerSeconds = 120;
 let timerRemaining = 120;
 let timerId = null;
+let backupHandle = null;
+let backupWriteTimer = null;
+
+const BACKUP_DB_NAME = "massJumpBackup.v1";
+const BACKUP_STORE = "handles";
+const BACKUP_KEY = "statsFile";
 
 function todayISO() {
   return toISO(new Date());
@@ -401,6 +577,8 @@ function loadState() {
     logs: {},
     metrics: [],
     programStartDateApplied: PROGRAM_START_DATE,
+    backupLastSaved: "",
+    backupFileName: "",
   };
 
   try {
@@ -420,6 +598,7 @@ function loadState() {
 
 function saveState() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  queueBackupWrite();
 }
 
 function getLog(iso = todayISO()) {
@@ -472,6 +651,7 @@ function formatDate(iso) {
 
 function renderAll() {
   const info = getBlockInfo();
+  document.body.dataset.activeTab = document.querySelector(".tab-button.is-active")?.dataset.tab || "today";
   document.getElementById("profileWeight").textContent = Number(state.bodyWeight).toFixed(state.bodyWeight % 1 ? 1 : 0);
   document.getElementById("phaseBadge").textContent = !info.started
     ? "Старт 06.07"
@@ -484,6 +664,7 @@ function renderAll() {
   renderSupplements();
   renderMetrics();
   renderLibrary();
+  renderBackupStatus();
   renderTimer();
   if (window.lucide) window.lucide.createIcons();
 }
@@ -522,6 +703,12 @@ function renderToday() {
   document.getElementById("quickProtein").value = log.protein ?? macros.protein;
   document.getElementById("quickCalories").value = log.calories ?? macros.calories;
   document.getElementById("quickSleep").value = log.sleep ?? "";
+  document.getElementById("quickWater").value = log.water ?? "";
+  document.getElementById("quickEnergy").value = log.energy ?? "";
+  document.getElementById("quickPain").value = log.pain ?? "";
+  document.getElementById("quickBasketball").value = log.basketball ?? "";
+  document.getElementById("quickWin").value = log.win ?? "";
+  document.getElementById("quickObstacle").value = log.obstacle ?? "";
   document.getElementById("quickNote").value = log.note ?? "";
   renderHeatmap();
 }
@@ -540,18 +727,45 @@ function workoutMarkup(workout, includeCompleteButton = false) {
       ${workout.blocks.map((block) => `
         <section class="workout-block">
           <h4>${block.name}</h4>
-          ${block.exercises.map(([name, sets, note]) => `
-            <div class="exercise-row">
-              <div><strong>${name}</strong><small>${note}</small></div>
-              <div><span class="set-chip">${sets}</span></div>
-              <div><small>${exerciseCue(name)}</small></div>
-            </div>
-          `).join("")}
+          ${block.exercises.map(([name, sets, note]) => exerciseDetailMarkup(name, sets, note)).join("")}
         </section>
       `).join("")}
     </div>
     ${includeCompleteButton ? `<button class="action-button complete-workout" type="button"><i data-lucide="check"></i><span>Закрыть тренировку</span></button>` : ""}
   `;
+}
+
+function exerciseDetailMarkup(name, sets, note) {
+  const guide = techniqueFor(name);
+  const cue = exerciseCue(name);
+  const video = guide?.video
+    ? `<a class="video-link" href="${guide.video}" target="_blank" rel="noreferrer"><i data-lucide="play-circle"></i><span>${guide.videoLabel || "Видео"}</span></a>`
+    : "";
+
+  return `
+    <details class="exercise-detail">
+      <summary>
+        <span class="exercise-main">
+          <strong>${name}</strong>
+          <small>${note}</small>
+        </span>
+        <span class="set-chip">${sets}</span>
+      </summary>
+      <div class="exercise-body">
+        <div class="cue-grid">
+          <div class="cue-box"><strong>Настройка</strong><p>${guide?.setup || "Подбери вариант, в котором можешь держать чистую амплитуду и контроль корпуса."}</p></div>
+          <div class="cue-box"><strong>Как делать</strong><p>${guide?.execution || cue}</p></div>
+          <div class="cue-box"><strong>Не делай</strong><p>${guide?.mistakes || "Не гонись за повтором, если техника развалилась или появилась острая боль."}</p></div>
+        </div>
+        ${video}
+      </div>
+    </details>
+  `;
+}
+
+function techniqueFor(name) {
+  const lower = name.toLowerCase();
+  return TECHNIQUE_DETAILS.find((guide) => guide.match.some((term) => lower.includes(term)));
 }
 
 function exerciseCue(name) {
@@ -658,6 +872,18 @@ function renderNutrition() {
   document.getElementById("mealList").innerHTML = MEALS.map(([title, text]) => `
     <div class="meal-item"><strong>${title}</strong><p>${text}</p></div>
   `).join("");
+  document.getElementById("recipeList").innerHTML = RECIPES.map((recipe) => `
+    <details class="recipe-item">
+      <summary>
+        <strong>${recipe.title}</strong>
+        <p>${recipe.meta}</p>
+      </summary>
+      <p><strong>Ингредиенты:</strong> ${recipe.ingredients}</p>
+      <ol class="recipe-steps">
+        ${recipe.steps.map((step) => `<li>${step}</li>`).join("")}
+      </ol>
+    </details>
+  `).join("");
   document.getElementById("groceryList").innerHTML = GROCERIES.map((item) => `<span>${item}</span>`).join("");
   document.getElementById("nutritionRules").innerHTML = NUTRITION_RULES.map((item) => `<li>${item}</li>`).join("");
 }
@@ -685,7 +911,50 @@ function renderMetrics() {
       </tr>
     `).join("")
     : `<tr><td colspan="6">Пока нет замеров. Первый лучше сделать утром: вес, талия, прыжок, максимум подтягиваний и брусьев.</td></tr>`;
+  renderInsights();
   drawChart();
+}
+
+function renderInsights() {
+  const element = document.getElementById("insightCards");
+  if (!element) return;
+
+  const today = todayISO();
+  const lastSeven = Array.from({ length: 7 }, (_, index) => state.logs[addDays(today, -index)] || {});
+  const macros = calcMacros();
+  const avgWeight = average(lastSeven.map((log) => log.weight));
+  const avgProtein = average(lastSeven.map((log) => log.protein));
+  const avgCalories = average(lastSeven.map((log) => log.calories));
+  const avgSleep = average(lastSeven.map((log) => log.sleep));
+  const avgPain = average(lastSeven.map((log) => log.pain));
+  const completed = lastSeven.filter((log) => CHECKS.filter(([key]) => log[key]).length >= 5).length;
+
+  const latestMetric = [...state.metrics].sort((a, b) => b.date.localeCompare(a.date))[0];
+  const advice = [];
+  if (avgProtein && avgProtein < macros.protein * 0.9) advice.push("Белок ниже цели: добавь творог, йогурт, мясо или протеин.");
+  if (avgCalories && avgCalories < macros.calories * 0.92) advice.push("Калорий мало для экстремального набора: добавь рис, пасту, масло или сэндвич.");
+  if (avgSleep && avgSleep < 7.2) advice.push("Сон режет рост и прыжок: цель 7.5-9 ч или дневной добор.");
+  if (avgPain && avgPain >= 4) advice.push("Боль высокая: снизь прыжки и объем на 30-50%, проверь технику.");
+  if (!advice.length) advice.push("База выглядит ровно. Держи ритм и записывай честные комментарии.");
+
+  element.innerHTML = [
+    ["Средний вес", avgWeight ? `${avgWeight.toFixed(1)} кг` : "нет", latestMetric?.weight ? `Последний замер: ${latestMetric.weight} кг` : "Взвешивайся утром."],
+    ["Белок 7 дней", avgProtein ? `${Math.round(avgProtein)} г` : "нет", `Цель: около ${macros.protein} г/день.`],
+    ["Сон 7 дней", avgSleep ? `${avgSleep.toFixed(1)} ч` : "нет", "Росту нужен сон, не только подходы."],
+    ["Закрыто дней", `${completed}/7`, advice[0]],
+  ].map(([label, value, text]) => `
+    <article class="insight-card">
+      <span class="mini-label">${label}</span>
+      <strong>${value}</strong>
+      <p>${text}</p>
+    </article>
+  `).join("");
+}
+
+function average(values) {
+  const clean = values.map(Number).filter((value) => Number.isFinite(value) && value > 0);
+  if (!clean.length) return null;
+  return clean.reduce((sum, value) => sum + value, 0) / clean.length;
 }
 
 function drawChart() {
@@ -784,6 +1053,15 @@ function drawLine(ctx, data, key, [min, max], color, pad, width, height) {
 }
 
 function renderLibrary() {
+  document.getElementById("videoLibrary").innerHTML = VIDEO_LIBRARY.map(([title, text, url]) => `
+    <div class="video-item">
+      <strong>${title}</strong>
+      <div>
+        <p>${text}</p>
+        <a class="source-link" href="${url}" target="_blank" rel="noreferrer"><i data-lucide="external-link"></i><span>Открыть видео</span></a>
+      </div>
+    </div>
+  `).join("");
   document.getElementById("exerciseLibrary").innerHTML = EXERCISES.map(([title, text, note]) => `
     <article class="exercise-card">
       <p class="eyebrow">Техника</p>
@@ -807,6 +1085,12 @@ function saveQuickLog() {
   log.protein = valueOrBlank("quickProtein");
   log.calories = valueOrBlank("quickCalories");
   log.sleep = valueOrBlank("quickSleep");
+  log.water = valueOrBlank("quickWater");
+  log.energy = valueOrBlank("quickEnergy");
+  log.pain = valueOrBlank("quickPain");
+  log.basketball = valueOrBlank("quickBasketball");
+  log.win = document.getElementById("quickWin").value.trim();
+  log.obstacle = document.getElementById("quickObstacle").value.trim();
   log.note = document.getElementById("quickNote").value.trim();
   if (log.weight) state.bodyWeight = Number(log.weight);
   saveState();
@@ -833,6 +1117,151 @@ function saveMetric() {
 function valueOrBlank(id) {
   const value = document.getElementById(id).value;
   return value === "" ? "" : Number(value);
+}
+
+function serializeState() {
+  return JSON.stringify({
+    app: "mass-jump-dunk-app",
+    version: 2,
+    exportedAt: new Date().toISOString(),
+    state,
+  }, null, 2);
+}
+
+function downloadState() {
+  const blob = new Blob([serializeState()], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `mass-jump-statistics-${todayISO()}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function queueBackupWrite() {
+  if (!backupHandle) return;
+  clearTimeout(backupWriteTimer);
+  backupWriteTimer = setTimeout(() => {
+    writeBackupFile(false).catch(() => renderBackupStatus("Не удалось обновить файл. Нажми «Файл на ПК» и разреши доступ снова."));
+  }, 700);
+}
+
+async function writeBackupFile(manual = true) {
+  if (!backupHandle) {
+    if (manual) downloadState();
+    return;
+  }
+  const permission = await verifyBackupPermission(backupHandle, manual);
+  if (!permission) {
+    if (manual) downloadState();
+    return;
+  }
+  const writable = await backupHandle.createWritable();
+  await writable.write(serializeState());
+  await writable.close();
+  state.backupLastSaved = new Date().toISOString();
+  state.backupFileName = backupHandle.name || state.backupFileName || "mass-jump-statistics.json";
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  renderBackupStatus("Файл статистики обновлен.");
+}
+
+async function verifyBackupPermission(handle, request) {
+  if (!handle?.queryPermission) return false;
+  const options = { mode: "readwrite" };
+  if ((await handle.queryPermission(options)) === "granted") return true;
+  if (request && (await handle.requestPermission(options)) === "granted") return true;
+  return false;
+}
+
+async function connectBackupFile() {
+  if (!window.showSaveFilePicker) {
+    renderBackupStatus("Этот браузер не умеет постоянно писать в выбранный файл. Скачаю JSON-копию обычным экспортом.");
+    downloadState();
+    return;
+  }
+  backupHandle = await window.showSaveFilePicker({
+    suggestedName: "mass-jump-statistics.json",
+    types: [
+      {
+        description: "JSON statistics",
+        accept: { "application/json": [".json"] },
+      },
+    ],
+  });
+  await storeBackupHandle(backupHandle);
+  await writeBackupFile(true);
+}
+
+function renderBackupStatus(message = "") {
+  const element = document.getElementById("backupStatus");
+  if (!element) return;
+  const saved = state.backupLastSaved
+    ? new Date(state.backupLastSaved).toLocaleString("ru-RU")
+    : "еще не было";
+  const file = state.backupFileName || (backupHandle?.name ?? "");
+  const api = window.showSaveFilePicker ? "На ПК в Chrome можно подключить JSON-файл." : "В этом браузере доступен ручной экспорт/импорт JSON.";
+  element.textContent = message || `${api} Браузерное сохранение активно. Файл: ${file || "не подключен"}. Последняя копия: ${saved}.`;
+}
+
+function openBackupDb() {
+  return new Promise((resolve, reject) => {
+    const request = indexedDB.open(BACKUP_DB_NAME, 1);
+    request.onupgradeneeded = () => request.result.createObjectStore(BACKUP_STORE);
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
+  });
+}
+
+async function storeBackupHandle(handle) {
+  const db = await openBackupDb();
+  await new Promise((resolve, reject) => {
+    const tx = db.transaction(BACKUP_STORE, "readwrite");
+    tx.objectStore(BACKUP_STORE).put(handle, BACKUP_KEY);
+    tx.oncomplete = resolve;
+    tx.onerror = () => reject(tx.error);
+  });
+  db.close();
+}
+
+async function loadBackupHandle() {
+  if (!window.showSaveFilePicker || !window.indexedDB) return;
+  try {
+    const db = await openBackupDb();
+    backupHandle = await new Promise((resolve, reject) => {
+      const tx = db.transaction(BACKUP_STORE, "readonly");
+      const request = tx.objectStore(BACKUP_STORE).get(BACKUP_KEY);
+      request.onsuccess = () => resolve(request.result || null);
+      request.onerror = () => reject(request.error);
+    });
+    db.close();
+    if (backupHandle?.name) state.backupFileName = backupHandle.name;
+    renderBackupStatus();
+  } catch {
+    renderBackupStatus();
+  }
+}
+
+function importStateFromFile(file) {
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      const parsed = JSON.parse(String(reader.result));
+      const imported = parsed.state || parsed;
+      if (!imported.logs || !imported.metrics) throw new Error("bad format");
+      state = {
+        ...loadState(),
+        ...imported,
+        logs: imported.logs || {},
+        metrics: imported.metrics || [],
+      };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      renderAll();
+      renderBackupStatus("Импорт выполнен. Проверь последние записи.");
+    } catch {
+      renderBackupStatus("Не получилось импортировать файл: нужен JSON-экспорт этого приложения.");
+    }
+  };
+  reader.readAsText(file);
 }
 
 function renderTimer() {
@@ -889,6 +1318,8 @@ function bindEvents() {
       document.querySelectorAll(".tab-page").forEach((page) => page.classList.remove("is-active"));
       tabButton.classList.add("is-active");
       document.getElementById(tabButton.dataset.tab).classList.add("is-active");
+      document.body.dataset.activeTab = tabButton.dataset.tab;
+      window.scrollTo({ top: 0, behavior: "smooth" });
       if (window.lucide) window.lucide.createIcons();
       return;
     }
@@ -948,14 +1379,18 @@ function bindEvents() {
   document.getElementById("timerPlus").addEventListener("click", () => changeTimer(30));
   document.getElementById("timerMinus").addEventListener("click", () => changeTimer(-30));
 
-  document.getElementById("exportData").addEventListener("click", () => {
-    const blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `mass-jump-discipline-${todayISO()}.json`;
-    a.click();
-    URL.revokeObjectURL(url);
+  document.getElementById("connectBackupFile").addEventListener("click", () => {
+    connectBackupFile().catch(() => renderBackupStatus("Файл не подключен. Можно попробовать еще раз или сделать обычный экспорт."));
+  });
+  document.getElementById("saveBackupNow").addEventListener("click", () => {
+    writeBackupFile(true).catch(() => renderBackupStatus("Не удалось сохранить копию. Сделай экспорт JSON."));
+  });
+  document.getElementById("exportData").addEventListener("click", downloadState);
+  document.getElementById("importData").addEventListener("click", () => document.getElementById("importFileInput").click());
+  document.getElementById("importFileInput").addEventListener("change", (event) => {
+    const [file] = event.target.files || [];
+    if (file) importStateFromFile(file);
+    event.target.value = "";
   });
 
   document.getElementById("resetData").addEventListener("click", () => {
@@ -968,6 +1403,7 @@ function bindEvents() {
 
 bindEvents();
 renderAll();
+loadBackupHandle();
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
