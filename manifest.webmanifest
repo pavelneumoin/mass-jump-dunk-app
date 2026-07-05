@@ -1,0 +1,19 @@
+{
+  "name": "Масса + Данк",
+  "short_name": "Масса",
+  "description": "8-недельный трекер тренировок, питания и прыжка.",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#f4f7f5",
+  "theme_color": "#167255",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

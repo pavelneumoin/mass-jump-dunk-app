@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#167255" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Масса + Данк" />
+    <title>Масса + Данк | 8-недельная дисциплина</title>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="assets/icon.svg" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="command-panel">
+        <img class="command-panel__image" src="assets/street-training-court.png" alt="Уличная площадка с турниками, резинками и баскетбольным кольцом" />
+        <div class="command-panel__shade"></div>
+        <div class="command-panel__content">
+          <div>
+            <p class="eyebrow">8 недель набора массы и прыжка</p>
+            <h1>Масса плеч, рук, спины. Прыжок для данка.</h1>
+          </div>
+          <div class="profile-strip" aria-label="Профиль">
+            <span><strong id="profileWeight">90</strong> кг</span>
+            <span><strong>190</strong> см</span>
+            <span><strong>33</strong> года</span>
+            <span id="phaseBadge">Неделя 1</span>
+          </div>
+        </div>
+      </header>
+
+      <nav class="tabbar" aria-label="Разделы">
+        <button class="tab-button is-active" data-tab="today" type="button">
+          <i data-lucide="check-circle-2"></i><span>Сегодня</span>
+        </button>
+        <button class="tab-button" data-tab="training" type="button">
+          <i data-lucide="dumbbell"></i><span>Тренировки</span>
+        </button>
+        <button class="tab-button" data-tab="nutrition" type="button">
+          <i data-lucide="utensils"></i><span>Питание</span>
+        </button>
+        <button class="tab-button" data-tab="supplements" type="button">
+          <i data-lucide="shield-plus"></i><span>Добавки</span>
+        </button>
+        <button class="tab-button" data-tab="metrics" type="button">
+          <i data-lucide="activity"></i><span>Замеры</span>
+        </button>
+        <button class="tab-button" data-tab="library" type="button">
+          <i data-lucide="book-open-check"></i><span>Техника</span>
+        </button>
+      </nav>
+
+      <main>
+        <section class="tab-page is-active" id="today" aria-labelledby="todayTitle">
+          <div class="dashboard-grid">
+            <article class="panel today-panel">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow" id="todayMeta">Сегодня</p>
+                  <h2 id="todayTitle">План дня</h2>
+                </div>
+                <button class="icon-button" id="printPlan" type="button" title="Печать">
+                  <i data-lucide="printer"></i>
+                </button>
+              </div>
+              <div id="todayWorkout"></div>
+            </article>
+
+            <aside class="panel discipline-panel">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Дисциплина</p>
+                  <h2>Чек-лист дня</h2>
+                </div>
+                <span class="score-pill" id="dailyScore">0/7</span>
+              </div>
+              <div class="check-list" id="dailyChecklist"></div>
+              <div class="streak-row">
+                <div>
+                  <span class="mini-label">Серия</span>
+                  <strong id="streakCount">0 дней</strong>
+                </div>
+                <div>
+                  <span class="mini-label">8-недельный блок</span>
+                  <strong id="blockProgress">0%</strong>
+                </div>
+              </div>
+            </aside>
+
+            <article class="panel week-panel">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Карта блока</p>
+                  <h2>56 дней</h2>
+                </div>
+                <span class="mini-label" id="completedDays">0 закрыто</span>
+              </div>
+              <div class="heatmap" id="heatmap"></div>
+            </article>
+
+            <article class="panel log-panel">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Быстрый лог</p>
+                  <h2>Цифры дня</h2>
+                </div>
+                <button class="icon-button" id="saveQuickLog" type="button" title="Сохранить">
+                  <i data-lucide="save"></i>
+                </button>
+              </div>
+              <form class="quick-form" id="quickLogForm">
+                <label>
+                  Вес утром
+                  <input id="quickWeight" type="number" min="50" max="150" step="0.1" placeholder="90.0" />
+                </label>
+                <label>
+                  Белок, г
+                  <input id="quickProtein" type="number" min="0" max="320" step="5" placeholder="180" />
+                </label>
+                <label>
+                  Калории
+                  <input id="quickCalories" type="number" min="0" max="6500" step="50" placeholder="3700" />
+                </label>
+                <label>
+                  Сон, ч
+                  <input id="quickSleep" type="number" min="0" max="14" step="0.25" placeholder="8" />
+                </label>
+                <label class="wide">
+                  Заметка
+                  <textarea id="quickNote" rows="3" placeholder="Что болело, что получилось, что надо поправить завтра"></textarea>
+                </label>
+              </form>
+            </article>
+          </div>
+        </section>
+
+        <section class="tab-page" id="training" aria-labelledby="trainingTitle">
+          <div class="section-heading page-heading">
+            <div>
+              <p class="eyebrow">Тренировочный блок</p>
+              <h2 id="trainingTitle">Улица, турники, блины, резинки, баскетбол</h2>
+            </div>
+            <div class="toolbar">
+              <label class="compact-field">
+                Старт
+                <input id="startDate" type="date" />
+              </label>
+              <label class="compact-field">
+                Вес
+                <input id="bodyWeight" type="number" min="50" max="150" step="0.1" />
+              </label>
+            </div>
+          </div>
+
+          <div class="phase-grid" id="phaseGrid"></div>
+          <div class="schedule-strip" id="scheduleStrip"></div>
+
+          <article class="panel">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Подробно</p>
+                <h2 id="selectedWorkoutTitle">Тренировка</h2>
+              </div>
+              <div class="segmented" id="workoutSelector"></div>
+            </div>
+            <div id="selectedWorkoutDetails"></div>
+          </article>
+
+          <div class="two-column">
+            <article class="panel">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Прогрессия</p>
+                  <h2>Как добавлять нагрузку</h2>
+                </div>
+              </div>
+              <ul class="clean-list" id="progressionRules"></ul>
+            </article>
+            <article class="panel">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">После 8 недель</p>
+                  <h2>Темп при выходе на работу</h2>
+                </div>
+              </div>
+              <ul class="clean-list" id="maintenanceRules"></ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="tab-page" id="nutrition" aria-labelledby="nutritionTitle">
+          <div class="section-heading page-heading">
+            <div>
+              <p class="eyebrow">Питание</p>
+              <h2 id="nutritionTitle">Простая еда для набора</h2>
+            </div>
+            <span class="score-pill" id="macroPill">3700 ккал</span>
+          </div>
+
+          <div class="nutrition-grid">
+            <article class="panel macro-panel">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Цели на день</p>
+                  <h2>Калории и макросы</h2>
+                </div>
+              </div>
+              <div class="macro-cards" id="macroCards"></div>
+              <p class="plain-note" id="macroNote"></p>
+            </article>
+
+            <article class="panel">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Шаблон</p>
+                  <h2>6 приемов без сложных блюд</h2>
+                </div>
+              </div>
+              <div class="meal-list" id="mealList"></div>
+            </article>
+          </div>
+
+          <div class="two-column">
+            <article class="panel">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Покупки</p>
+                  <h2>База на неделю</h2>
+                </div>
+              </div>
+              <div class="tag-cloud" id="groceryList"></div>
+            </article>
+            <article class="panel">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Коррекция</p>
+                  <h2>Если вес не идет</h2>
+                </div>
+              </div>
+              <ul class="clean-list" id="nutritionRules"></ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="tab-page" id="supplements" aria-labelledby="supplementsTitle">
+          <div class="section-heading page-heading">
+            <div>
+              <p class="eyebrow">Добавки и волосы</p>
+              <h2 id="supplementsTitle">Минимум банок, максимум контроля</h2>
+            </div>
+          </div>
+
+          <article class="panel">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Ежедневно</p>
+                <h2>Схема добавок</h2>
+              </div>
+            </div>
+            <div class="supplement-table" id="supplementTable"></div>
+          </article>
+
+          <div class="two-column">
+            <article class="panel warning-panel">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Выпадают волосы</p>
+                  <h2>Что проверить</h2>
+                </div>
+              </div>
+              <ul class="clean-list" id="hairPlan"></ul>
+            </article>
+            <article class="panel">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Безопасность</p>
+                  <h2>Что не делать</h2>
+                </div>
+              </div>
+              <ul class="clean-list" id="avoidList"></ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="tab-page" id="metrics" aria-labelledby="metricsTitle">
+          <div class="section-heading page-heading">
+            <div>
+              <p class="eyebrow">Контроль</p>
+              <h2 id="metricsTitle">Вес, прыжок, силовые</h2>
+            </div>
+            <div class="toolbar">
+              <button class="action-button" id="exportData" type="button">
+                <i data-lucide="download"></i><span>Экспорт</span>
+              </button>
+              <button class="ghost-button" id="resetData" type="button">
+                <i data-lucide="rotate-ccw"></i><span>Сброс</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="metrics-grid">
+            <article class="panel">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Новая запись</p>
+                  <h2>Замер</h2>
+                </div>
+                <button class="icon-button" id="saveMetric" type="button" title="Сохранить">
+                  <i data-lucide="save"></i>
+                </button>
+              </div>
+              <form class="quick-form" id="metricForm">
+                <label>
+                  Дата
+                  <input id="metricDate" type="date" />
+                </label>
+                <label>
+                  Вес
+                  <input id="metricWeight" type="number" min="50" max="150" step="0.1" />
+                </label>
+                <label>
+                  Талия
+                  <input id="metricWaist" type="number" min="50" max="140" step="0.5" />
+                </label>
+                <label>
+                  Прыжок, см
+                  <input id="metricJump" type="number" min="0" max="130" step="0.5" />
+                </label>
+                <label>
+                  Подтягивания
+                  <input id="metricPullups" type="number" min="0" max="50" step="1" />
+                </label>
+                <label>
+                  Брусья
+                  <input id="metricDips" type="number" min="0" max="80" step="1" />
+                </label>
+              </form>
+            </article>
+
+            <article class="panel chart-panel">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Тренд</p>
+                  <h2>График</h2>
+                </div>
+              </div>
+              <canvas id="metricChart" width="900" height="420" aria-label="График веса и прыжка"></canvas>
+            </article>
+          </div>
+
+          <article class="panel">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">История</p>
+                <h2>Последние замеры</h2>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Дата</th>
+                    <th>Вес</th>
+                    <th>Талия</th>
+                    <th>Прыжок</th>
+                    <th>Подтяг.</th>
+                    <th>Брусья</th>
+                  </tr>
+                </thead>
+                <tbody id="metricRows"></tbody>
+              </table>
+            </div>
+          </article>
+        </section>
+
+        <section class="tab-page" id="library" aria-labelledby="libraryTitle">
+          <div class="section-heading page-heading">
+            <div>
+              <p class="eyebrow">Техника</p>
+              <h2 id="libraryTitle">Описание упражнений</h2>
+            </div>
+          </div>
+          <div class="exercise-grid" id="exerciseLibrary"></div>
+          <article class="panel sources-panel">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Опора</p>
+                <h2>Источники</h2>
+              </div>
+            </div>
+            <div class="source-list" id="sourceList"></div>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <div class="rest-timer" aria-label="Таймер отдыха">
+      <div>
+        <span class="mini-label">Отдых</span>
+        <strong id="timerDisplay">02:00</strong>
+      </div>
+      <button class="icon-button" id="timerMinus" type="button" title="Меньше">
+        <i data-lucide="minus"></i>
+      </button>
+      <button class="icon-button" id="timerStart" type="button" title="Старт">
+        <i data-lucide="play"></i>
+      </button>
+      <button class="icon-button" id="timerReset" type="button" title="Сброс">
+        <i data-lucide="square"></i>
+      </button>
+      <button class="icon-button" id="timerPlus" type="button" title="Больше">
+        <i data-lucide="plus"></i>
+      </button>
+    </div>
+  </body>
+</html>
